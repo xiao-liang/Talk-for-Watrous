@@ -1,0 +1,130 @@
+% tcolorbox macro
+% Usage: \begin{mybox}{Box_title} contents \end{mybox}
+
+
+
+% Macros:
+% Case-insensitive, Alphabetical ordering
+\newcommand{\Adv}{\ensuremath{\mathcal{A}}\xspace}
+\newcommand{\AglB}[1]{\ensuremath{\langle #1 \rangle}}
+\newcommand{\amount}{\ensuremath{\mathsf{amount}}\xspace}
+\newcommand{\Aux}{\ensuremath{\mathsf{Aux}}\xspace}
+\newcommand{\A}{\ensuremath{\mathsf{Alice}}\xspace}
+\newcommand{\Bad}{\ensuremath{\mathsf{Bad}}\xspace}
+\newcommand{\BBCom}{\ensuremath{\mathsf{BBCom}}\xspace}
+\newcommand{\BBOWFP}{\ensuremath{\mathsf{BB}\text{-}\mathsf{OWFP}}\xspace}
+\newcommand{\BBProve}{\ensuremath{\mathsf{BBProve}}\xspace}
+\newcommand{\Bdv}{\ensuremath{\mathcal{B}}\xspace}
+\newcommand{\bits}{\ensuremath{\{0,1\}}\xspace}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+\newcommand{\BPP}{\ensuremath{\mathcal{BPP}}\xspace}
+\newcommand{\ch}{\ensuremath{\mathsf{ch}}\xspace}
+\newcommand{\cind}{\ensuremath{\stackrel{\text{c}}{\approx}}\xspace}
+\newcommand{\Circuit}{\ensuremath{\mathsf{Cir}}\xspace}
+\newcommand{\CKTVAL}{\ensuremath{\textsc{CktVal}}\xspace}
+\newcommand{\cm}{\ensuremath{\mathsf{cm}}\xspace}
+\newcommand{\com}{\ensuremath{\mathsf{com}}\xspace}
+\newcommand{\Com}{\ensuremath{\mathsf{Com}}\xspace}
+\newcommand{\ConPar}{\ensuremath{n}}
+\newcommand{\CRHF}{\ensuremath{\mathsf{CRHF}}\xspace}
+\newcommand{\cZK}{\ensuremath{c\mathcal{ZK}}\xspace}
+\newcommand{\Dec}{\ensuremath{\mathsf{Dec}}\xspace}
+\newcommand{\Dist}{\ensuremath{\mathcal{D}}\xspace}
+
+\newcommand{\Domain}{\ensuremath{\mathsf{D}}\xspace}
+\newcommand{\Dstng}{\ensuremath{\mathcal{D}}\xspace}
+
+\newcommand{\Easy}{\ensuremath{\mathsf{Easy}}\xspace}
+\newcommand{\ECC}{\ensuremath{\mathsf{ECC}}\xspace}
+\newcommand{\Enc}{\ensuremath{\mathsf{Enc}}\xspace}
+\newcommand{\Error}{\ensuremath{\delta}\xspace}
+\newcommand{\Eval}{\ensuremath{\mathsf{Eval}}\xspace}
+\newcommand{\Event}{\ensuremath{\mathsf{Event}}\xspace}
+\newcommand{\Exec}{\ensuremath{\mathsf{Exec}}\xspace}
+\newcommand{\ExtCom}{\ensuremath{\mathsf{ExtCom}}\xspace}
+\newcommand{\Ext}{\ensuremath{\mathsf{Ext}}\xspace}
+
+\newcommand{\Field}{\ensuremath{\mathbb{F}}\xspace}
+\newcommand{\Func}{\ensuremath{\mathcal{F}}\xspace}
+
+\newcommand{\given}[1][\big]{\:#1\vert\:}
+\newcommand{\Good}{\ensuremath{\mathsf{Good}}\xspace}
+\newcommand{\gray}[1]{{\color{Gray} #1}}
+\newcommand{\green}[1]{{\color{ForestGreen} #1}}
+
+\newcommand{\Ham}{\ensuremath{\Delta}\xspace}
+\newcommand{\Hard}{\ensuremath{\mathsf{Hard}}\xspace}
+
+\newcommand{\idind}{\ensuremath{\stackrel{\text{i.d.}}{=\mathrel{\mkern-3mu}=}}\xspace}
+\newcommand{\IDEAL}{\ensuremath{\mathsf{IDEAL}}\xspace}
+\newcommand{\Ind}{\ensuremath{\mathsf{Ind}}\xspace}
+\newcommand{\Input}{\ensuremath{\mathsf{in}}\xspace}
+\newcommand{\IP}{\ensuremath{\mathcal{IP}}\xspace}
+
+\newcommand{\KGen}{\ensuremath{\mathsf{KGen}}\xspace}
+
+\newcommand{\Lang}{\ensuremath{\mathcal{L}}\xspace}
+
+\newcommand{\NCKTVAL}{\ensuremath{\textsc{NdCktVal}}\xspace}
+\newcommand{\negl}{\ensuremath{\mathsf{negl}}\xspace}
+\newcommand{\NoHard}{\ensuremath{\mathsf{NoHard}}\xspace}
+\newcommand{\NP}{\ensuremath{\mathsf{NP}}\xspace}
+\newcommand{\np}{\NP}
+
+\newcommand{\om}[1]{{\noindent \color{magenta}OM: #1}}
+\newcommand{\Ora}{\ensuremath{\mathcal{O}}\xspace}
+\newcommand{\ora}{\ensuremath{\mathsf{O}}\xspace}
+\newcommand{\Output}{\ensuremath{\mathsf{Out}}\xspace}
+\newcommand{\OWFP}{\ensuremath{\mathsf{OWFP}}\xspace}
+\newcommand{\OWF}{\ensuremath{\mathsf{OWF}}\xspace}
+\newcommand{\owf}{\OWF}
+
+\renewcommand{\P}{\ensuremath{\mathcal{P}}\xspace}
+\newcommand{\Path}{\ensuremath{\mathsf{P}}\xspace}
+\newcommand{\PBCom}{\ensuremath{\mathsf{PBCom}}\xspace}
+\newcommand{\PHCom}{\ensuremath{\mathsf{PHCom}}\xspace}
+% \newcommand{\pick}{\ensuremath{\xleftarrow{\$}}\xspace}
+\newcommand{\pick}{\ensuremath{\leftarrow}\xspace}
+\newcommand{\poly}{\ensuremath{\mathsf{poly}}\xspace}
+\newcommand{\PPT}{\ensuremath{\mathrm{PPT}}\xspace}
+\newcommand{\PRF}{\ensuremath{\mathsf{PRF}}\xspace}
+\newcommand{\PRG}{\ensuremath{\mathsf{PRG}}\xspace}
+\newcommand{\Prob}[2][]{\ensuremath{\Pr#1[ \text{#2} #1]}}
+\newcommand{\Prot}{\ensuremath{\mathrm{\Pi}}\xspace}
+
+\newcommand{\Range}{\ensuremath{\mathsf{R}}\xspace}
+\newcommand{\REAL}{\ensuremath{\mathsf{REAL}}\xspace}
+\newcommand{\Recon}{\ensuremath{\mathsf{Recon}}\xspace}
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\Relation}{\ensuremath{\mathcal{R}}\xspace}
+\newcommand{\RouPar}{\ensuremath{k}}
+
+\newcommand{\SBCom}{\ensuremath{\mathsf{SBCom}}\xspace}
+\newcommand{\SecPar}{\ensuremath{\lambda}\xspace}
+\newcommand{\Seq}[1]{\ensuremath{\{#1\}}\xspace}
+\newcommand{\Set}[1]{\ensuremath{\{#1\}}\xspace}
+\newcommand{\Share}{\ensuremath{\mathsf{Share}}\xspace}
+\newcommand{\SHCom}{\ensuremath{\mathsf{SHCom}}\xspace}
+\newcommand{\Sim}{\ensuremath{\mathsf{Sim}}\xspace}
+\newcommand{\sind}{\ensuremath{\stackrel{\text{s}}{\approx}}\xspace}
+\newcommand{\ST}{\ensuremath{\mathsf{ST}}\xspace}
+
+\newcommand{\Trans}{\ensuremath{\tau}\xspace}
+
+
+
+\newcommand{\Valid}{\ensuremath{\mathsf{Valid}}\xspace}
+\newcommand{\Vectbf}[1]{\ensuremath{\mathbf{#1}}\xspace}
+\newcommand{\Vect}[1]{\ensuremath{\overline{#1}}\xspace}
+\newcommand{\View}{\ensuremath{\mathsf{View}}\xspace}
+\newcommand{\VSSCom}{\ensuremath{\mathsf{VSSCom}}\xspace}
+\newcommand{\VSS}{\ensuremath{\mathsf{VSS}}\xspace}
+
+\newcommand{\xiao}[1]{{\noindent \color{red}XIAO: #1}}
+\newcommand{\xor}{\ensuremath{\oplus}\xspace}
+
+\newcommand{\ZK}{\ensuremath{\mathsf{ZK}}\xspace}
+\newcommand{\zk}{\ZK}
+\newcommand{\ZKCnP}{\ensuremath{\mathsf{ZKCnP}}\xspace}
+\newcommand{\ZKP}{\ensuremath{\mathsf{ZKP}}\xspace}
+\newcommand{\zkp}{\ZKP}

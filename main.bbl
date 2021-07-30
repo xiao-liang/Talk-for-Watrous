@@ -1,0 +1,22 @@
+\begin{thebibliography}{MW04}
+
+\bibitem[MW04]{DBLP:conf/coco/MarriottW04}
+Chris Marriott and John Watrous.
+\newblock Quantum arthur-merlin games.
+\newblock In {\em 19th Annual {IEEE} Conference on Computational Complexity
+  {(CCC} 2004), 21-24 June 2004, Amherst, MA, {USA}}, pages 275--285. {IEEE}
+  Computer Society, 2004.
+
+\bibitem[Wat06]{DBLP:conf/stoc/Watrous06}
+John Watrous.
+\newblock Zero-knowledge against quantum attacks.
+\newblock In Jon~M. Kleinberg, editor, {\em Proceedings of the 38th Annual
+  {ACM} Symposium on Theory of Computing, Seattle, WA, USA, May 21-23, 2006},
+  pages 296--305. {ACM}, 2006.
+
+\bibitem[Wat09]{DBLP:journals/siamcomp/Watrous09}
+John Watrous.
+\newblock Zero-knowledge against quantum attacks.
+\newblock {\em {SIAM} J. Comput.}, 39(1):25--58, 2009.
+
+\end{thebibliography}

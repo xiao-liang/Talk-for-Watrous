@@ -1,0 +1,97 @@
+\documentclass[aspectratio=1610, 12pt]{beamer}
+\usefonttheme{professionalfonts}
+\usepackage{siunitx}
+\usepackage{newtxtext}
+\usepackage{bm}
+% Possible aspect ration: 1610, 149, 54, 43 and 32.
+\usepackage{Xiao-slides}
+%Information to be included in the title page:
+\title{The Watrous ZK Proof}
+
+\subtitle{}
+\author{}
+\institute{}
+\date{\today}
+ 
+ 
+ 
+\begin{document}
+ 
+
+\frame{\titlepage}
+
+
+
+
+\begin{frame}
+\frametitle{Post-Quantum ZK for NP}
+
+The model:
+\begin{itemize}
+\item
+Classical $P$ and $V$
+\item
+ZK system for \NP languages
+\item
+$V^*$ can be quantum. 
+\begin{itemize}
+\item
+Modeled as a quantum polynomial-time (QPT) Turing machine.
+\item
+equivalently (and more preferred in QC literature), poly-size quantum circuits. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Post-Quantum (Black-Box) ZK Is Hard}
+
+Why's {\bf rewinding} hard?
+\begin{itemize}
+\item
+    information gain VS state disturbance
+\item
+ the no-cloning theorem
+\end{itemize}
+~\\
+This work --- a quantum rewinding lemma 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Some Historical Notes}
+Techniques inspired by Marriot-Watrous \cite{DBLP:conf/coco/MarriottW04} 
+\begin{itemize}
+\item error-gap amplification for QMA using only 1 witness state
+\end{itemize}
+~\\
+First published at STOC'06 \cite{DBLP:conf/stoc/Watrous06}
+\begin{itemize}
+\item
+explicit connection to \cite{DBLP:conf/coco/MarriottW04}
+\item
+we will see this version today
+\end{itemize}
+~\\
+Then, SIAM Journal of Computing in 2009 \cite{DBLP:journals/siamcomp/Watrous09}
+\begin{itemize}
+\item
+simplified, ad hoc proof
+\item
+hiding the connection with Marriot-Watrous
+\item
+so, we don't use this version today
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}%[allowframebreaks]
+        \frametitle{References}
+\bibliographystyle{alpha}
+\bibliography{additionalRef}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,268 @@
+\ProvidesPackage{Xiao-Talk}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{breakcites}
+\usepackage{booktabs}
+\usepackage{wrapfig}
+
+\usepackage{anyfontsize}
+% change font size temporarily 
+% usage: {\fontsize{size}{baselineskip} text..}
+% baselineskip should be roughly 1.2x size. 
+
+
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{xspace}
+
+
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+
+\setlength\parindent{0pt}
+\setlength\parskip{0pt}
+
+
+%-- Minimize the margins around the texts
+\usepackage{fullpage}
+
+\pagestyle{plain}
+
+
+
+
+
+
+%-- hyper-link TOC ----
+% add pagebackref to backref the bib record to the places in the mainbody
+\usepackage[pagebackref=true]{hyperref} 
+\hypersetup{
+  linktoc=all, 
+  hidelinks, 
+  colorlinks=true,
+  allcolors=blue
+  % default color settings:
+  %linkcolor=red,
+  %anchorcolor=black,
+  %citecolor=green,
+  %filecolor=cyan,
+  %menucolor=red,
+  %runcolor=cyan,
+  %urlcolor=magenta
+}
+
+
+
+
+% Load this package as late as possible
+\usepackage[nameinlink]{cleveref}
+\Crefname{Algorithm}{Algorithm}{Algorithms}
+\Crefname{appendix}{Appx.}{Appx.}
+\Crefname{Case}{Case}{Cases}
+\Crefname{Condition}{Condition}{Conditions}
+\Crefname{definition}{Def.}{Def.}
+\Crefname{equation}{Eq.}{Eq.}
+\Crefname{Execution}{Execution}{Executions}
+\Crefname{Expression}{Expression}{Expressions}
+\creflabelformat{Expression}{#2(#1)#3}
+\Crefname{figure}{Fig.}{Fig.}
+\Crefname{Inequality}{Inequality}{Inequalities}
+\creflabelformat{Inequality}{#2(#1)#3}
+\Crefname{lemma}{Lem.}{Lem.}
+\Crefname{obs}{Observation}{Observations}
+\Crefname{Path}{Path}{Paths}
+\Crefname{Problem}{Problem}{Problems}
+\Crefname{remark}{Rmk.}{Rmk.}
+\Crefname{section}{Sec.}{Sec.}
+\Crefname{Stage}{Stage}{Stages}
+\Crefname{Step}{Step}{Steps}
+\Crefname{theorem}{Thm.}{Thm.}
+
+
+\usepackage[many]{tcolorbox}
+% --Construction Box---------------
+\newtcolorbox
+[auto counter,
+Crefname={Constr.}{Constr.},
+]{ConstructionBox}[2][]
+{
+  title    = Construction~\thetcbcounter: #2,#1,
+  fonttitle=\bfseries,
+  enforce breakable, % breakable across pages
+  colframe = black,
+  coltitle = black,
+  colbacktitle = white, 
+  coltext  = black, 
+  colback  = white,
+  arc=0pt,
+  outer arc=0pt,
+  boxrule=0.5pt,
+  left=0pt, % left margin
+  right=0pt, % right margin
+   top=0pt,
+  bottom=0pt,
+}
+
+% --Protocol Box------------------
+\newtcolorbox
+[auto counter,
+Crefname={Prot.}{Prot.}
+]{ProtocolBox}[2][]
+{
+  title    = Protocol~\thetcbcounter: #2,#1,
+  fonttitle=\bfseries,
+  enforce breakable, % breakable across pages
+  colframe = black,
+  coltitle = black,
+  colbacktitle = white, 
+  coltext  = black, 
+  colback  = white,
+  arc=0pt,
+  outer arc=0pt,
+  boxrule=0.5pt,
+  left=0pt, % left margin
+  right=0pt, % right margin
+   top=0pt,
+  bottom=0pt,
+}
+
+\newtcolorbox
+[auto counter,
+Crefname={Fig.}{Fig.},
+]{FigureBox}[2][]
+{
+  title    = Figure~\thetcbcounter: #2,#1,
+  fonttitle=\bfseries,
+  enforce breakable, % breakable across pages
+  colframe = black,
+  coltitle = black,
+  colbacktitle = white, 
+  coltext  = black, 
+  colback  = white,
+  arc=0pt,
+  outer arc=0pt,
+  boxrule=0.5pt,
+  left=0pt, % left margin
+  right=0pt, % right margin
+   top=0pt,
+  bottom=0pt,
+}
+
+\newtcolorbox[auto counter]{CommentBox}[2][]
+{
+  breakable,
+  colframe = gray!10,
+  colback  = gray!2,
+  coltitle = red, 
+  coltext  = red, 
+  title    = #2,
+  arc=0pt,
+  outer arc=0pt,
+  boxrule=1.5pt,
+  left=0mm,
+  right=0pt,
+  top=0pt,
+  bottom=0pt,
+}
+
+
+\newtcolorbox[
+auto counter,
+% number within=section, 
+Crefname={Algo.}{Algo.}
+]{AlgorithmBox}[2][]
+{
+  title    = Algorithm~\thetcbcounter: #2,#1,
+  fonttitle=\bfseries,
+  enforce breakable, % breakable across pages
+  colframe = black,
+  coltitle = black,
+  colbacktitle = white, 
+  coltext  = black, 
+  colback  = white,
+  arc = 0pt,
+  outer arc = 0pt,
+  boxrule = 0.5pt,
+  left = 0pt, % left margin
+  right = 0pt, % right margin
+  top=0pt,
+  bottom=0pt
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Create a claim environment with its own counter.
+% for LLNCS, please use \spnewtheorem, instead of " \newtheorem{MyClaim}[MyClaimCounter]{Claim}"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \newcounter{MyClaimCounter}
+% % \spnewtheorem{MyClaim}[MyClaimCounter]{Claim}{\bfseries}{\itshape}
+% % \Crefname{MyClaim}{Claim}{Claims}
+
+%\newtheorem{construction}[theorem]{Construction}
+
+\crefname{construction}{construction}{constructions}
+\Crefname{construction}{Construction}{Constructions}
+
+
+
+
+% make a subsubsection
+\makeatletter
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                       {-18\p@ \@plus -4\p@ \@minus -4\p@}%
+                       {0.5em \@plus 0.22em \@minus 0.1em}%
+                       {\normalfont\normalsize\bfseries\boldmath}}
+\makeatother
+\setcounter{secnumdepth}{3}
+
+
+
+
+% Comment related macros
+\usepackage[normalem]{ulem}
+\newcommand{\dlt}{\bgroup\markoverwith{\textcolor{red}{\rule[0.5ex]{1pt}{0.9pt}}}\ULon}
+
+
+% number a specific line of equations
+\newcommand{\numberthis}{\addtocounter{equation}{1}\tag{\theequation}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% formatting related macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \newcommand{\para}[1]{{\color{Plum}\vspace{1em}\noindent {\bf #1}}}
+\newcommand{\subpara}[1]{\vspace{1em}\noindent {\em #1}}
+\usepackage{enumitem}
+\setitemize{topsep=0.2em,itemsep=-0.3em}
+\setenumerate{topsep=0.5em,itemsep=0em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The LLNCS bib file "splncs04" is problematic in that 
+% it presents DOI which contains the underscore symbol. 
+% The underscore symbol (outside math env) cannot be processed
+% by latex. This package solves this issue. But once this package 
+% is used, underscores in macro parameters (e.g., in "\label{...}") 
+%are not allowed anymore.
+% Also, this package should be loaded after \usepackage{tcolorbox}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \usepackage[strings]{underscore}
+
+\newcommand{\sepline}{{\color{Plum}\noindent\makebox[\linewidth]{\rule{\textwidth+3em}{2pt}}}}
+
+\newcounter{paracounter}[section]
+\newcommand{\para}[1]{
+  \stepcounter{paracounter}
+  \vspace{1em}
+  \sepline
+  \vspace{0em} 
+  {\color{Plum}{\bf \hspace{-1.3em}\thesection.\theparacounter~~#1}}\vspace{0.5em} 
+}
+
+
