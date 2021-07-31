@@ -1,26 +1,42 @@
-\documentclass[aspectratio=1610, 12pt]{beamer}
+\documentclass[aspectratio=1610, 12pt, xcolor={dvipsnames}]{beamer}
 \usefonttheme{professionalfonts}
 \usepackage{siunitx}
 \usepackage{newtxtext}
 \usepackage{bm}
 % Possible aspect ration: 1610, 149, 54, 43 and 32.
 \usepackage{Xiao-slides}
-%Information to be included in the title page:
-\title{The Watrous ZK Proof}
 
-\subtitle{}
-\author{}
-\institute{}
-\date{\today}
+\input{Macros}
+%Information to be included in the title page:
+% \title{The Watrous Post-Quantum Zero-Knowledge Proof}
+% \subtitle{Presentation at the Max-Planck Institute Crypto Reading Group}
+% \author{by\\~\\Xiao Liang}
+% \institute{Stony Brook University \\and\\ Max Planck Institute (Security and Privacy)}
+% \date{\today}
  
  
  
 \begin{document}
  
 
-\frame{\titlepage}
+% \frame{\titlepage}
 
-
+\begin{frame}
+\vspace{4em}
+\centerline{\Large\beamerblue{The Watrous Post-Quantum Zero-Knowledge Proof}}
+\vspace{3em}
+\centerline{\beamerblue{A Crypto Reading Group Presentation}}
+\vspace{1em}
+\centerline{by}
+\vspace{1em}
+\centerline{Xiao Liang}
+\vspace{2em}
+\centerline{\small\textsc{Stony Brook University}}
+\centerline{\small and}
+\centerline{\small\textsc{Max Planck Institute (Security and Privacy)}}
+\vspace{1em}
+\centerline{\small\today}
+\end{frame}
 
 
 \begin{frame}
@@ -38,9 +54,14 @@ $V^*$ can be quantum.
 \item
 Modeled as a quantum polynomial-time (QPT) Turing machine.
 \item
-equivalently (and more preferred in QC literature), poly-size quantum circuits. 
+equivalently (and more preferred in quantum-computing literature), poly-size quantum circuits. 
+\item 
+Non-uniformity: $V^*$ has an auxiliary quantum state that depends only on the security para.\ $\SecPar$. More accurately,
+$$V^* = \Set{\mathsf{QC}_\SecPar, \ket{\psi_\SecPar}}_{\SecPar\in \mathbb{N}}$$
 \end{itemize}
 \end{itemize}
+
+
 \end{frame}
 
 
@@ -55,7 +76,7 @@ Why's {\bf rewinding} hard?
  the no-cloning theorem
 \end{itemize}
 ~\\
-This work --- a quantum rewinding lemma 
+The major result in \cite{DBLP:conf/stoc/Watrous06}: a quantum rewinding lemma 
 \end{frame}
 
 
@@ -71,7 +92,8 @@ First published at STOC'06 \cite{DBLP:conf/stoc/Watrous06}
 \item
 explicit connection to \cite{DBLP:conf/coco/MarriottW04}
 \item
-we will see this version today
+we will see this version today 
+\item my notation is consistent with this version
 \end{itemize}
 ~\\
 Then, SIAM Journal of Computing in 2009 \cite{DBLP:journals/siamcomp/Watrous09}
@@ -81,10 +103,246 @@ simplified, ad hoc proof
 \item
 hiding the connection with Marriot-Watrous
 \item
-so, we don't use this version today
+so, we don't use this version today 
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+        \frametitle{GMW ZK for Graph Isomorphism (GI)}
+
+Some Remarks:
+\begin{itemize}
+\item
+GI is not known to be \NP-complete.
+\item
+the 1st message of the GMW GI protocol is perfectly uniform.
+\end{itemize}
+~\\
+
+{\bf Input for $P$:} statement $(G_0, G_1) \in \mathcal{G}_\SecPar \times\mathcal{G}_\SecPar$, witness $w = \sigma$ s.t.\ $\sigma(G_1) = G_0$
+
+{\bf Input for $V$:}  $(G_0, G_1)$
+\begin{enumerate}
+\item 
+$P$ samples $\pi \pick S_\SecPar$, sends $H = \pi(G_0)$
+\item
+$V$ sends $a \pick \bits$
+\item
+$P$ sends $\tau = \pi \circ \sigma^a$
+\end{enumerate}
+{\bf $V$'s decision:} accept iff $\tau(G_a) = H$
+\\~
+
+{\bf Classical Sim:} guess the bit $a$
+
+\end{frame}
+
+
+
+\begin{frame}
+        \frametitle{Modeling in Quantum Way}
+
+
+{\bf Model a Quantum $V^*$:} circuit family $\Set{\vb{V}_H}_{ H \in \mathcal{G}_\SecPar}$, auxiliary input $\ket{\psi}$
+\begin{itemize}
+	\item receives $H$ from P
+	\item
+	Perform $\vb{V}_H \ket{\psi}_\reg{w} \ket{0}_\reg{v} \ket{0}_\reg{a} = \alpha_0 \ket{\psi_0}_\reg{wv} \ket{0}_\reg{a} + \alpha_1 \ket{\psi_1}_\reg{wv} \ket{1}_\reg{a}$ 
+	\begin{itemize}
+	\item $\reg{v}$: work space
+	\item $\reg{a}$: single-qubit register to store $V^*$'s challenge.
+	\item Note that $\vb{V}_H$ operates on space $\reg{w}\tensor \reg{v} \tensor \reg{a}$
+	\end{itemize}
+	
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modeling in Quantum Way}
+View the protocol through a quantum lens: 
+\begin{itemize}
+	\item
+	The full space $\reg{w} \tensor \reg{x}$, where $\reg{x} = \reg{v} \tensor \reg{a} \tensor \reg{y} \tensor \reg{b} \tensor \reg{z}$
+\item
+$P$ performs $$\vb{T} \ket{0}_\reg{YBZ} = \frac{1}{\sqrt{2\SecPar!}} \sum_{b\in \bits} \sum_{\pi \in S_\SecPar} \ket{\pi(G_b)}_\reg{y} \ket{b}_\reg{B} \ket{\pi}_\reg{z}$$
+\item
+$V$ apply $\vb{V} = \sum_{H \in \mathcal{G}} \vb{V}_H \tensor \ketbra{H}_\reg{y} \tensor \idm_\reg{bz}$ on the full space $\reg{w}\tensor\reg{x}$
+\begin{itemize}
+	\item recall that $\vb{V}_H$ operates on $\ket{\psi}_\reg{w} \ket{0}_\reg{v} \ket{0}_\reg{a}$
+\item 
+corresponding to the exec.\ in super-position
+\item
+Output format:
+$$ \alpha_{00}\ket{\psi_{00}}\ket{00}_\reg{ab} +  \alpha_{01}\ket{\psi_{01}}\ket{01}_\reg{ab} + \alpha_{10}\ket{\psi_{10}}\ket{10}_\reg{ab} +\alpha_{11}\ket{\psi_{11}}\ket{11}_\reg{ab}$$
+\end{itemize}
+\end{itemize}
+In summary, the protocol up to step 2 is:
+$$\underbrace{\vb{V}\vb{T}}_{\text{on}~\reg{w}\tensor \reg{x}} (\ket{\psi}_\reg{w} \ket{0}_{\reg{x}= \reg{VAYBZ}}) ~~\Iff~~ \underbrace{\vb{V}\vb{T}(\idm_\reg{w} \tensor \ket{0}_\reg{x})}_{\text{only on}~\reg{w}} \ket{\psi}$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Measuring the Guess}
+
+Define a binary-outcome measurement on the full space $\reg{w}\tensor\reg{x}$: 
+\begin{itemize}
+\item $\vb{\Pi}_0 = \ketbra{0}_\reg{ab}, ~~~ \vb{\Pi}_1 \coloneqq \idm_\reg{ab} - \ketbra{0}_\reg{ab} = \ketbra{1}_\reg{ab}$
+\item 
+work on the full space $\reg{w}\tensor\reg{x}$. Just tensor identities on registers other than $\reg{ab}$
+\end{itemize}
+~\\
+
+
+Performing $\Set{\vb{\Pi}_0, \vb{\Pi}_1}$ on $\vb{V}\vb{T}\ket{\psi}_\reg{w}\ket{0}_\reg{x}$ boils down to:
+\begin{itemize}
+\item the probability for outcome $0$ is 
+$\Tr\big(\bra{\psi}\vb{Q} \ket{\psi}\big)$
+\item the probability for outcome $1$ is 
+$\Tr\big(\bra{\psi}( \idm_\reg{w}- \vb{Q} )\ket{\psi}\big)$
+\end{itemize}
+where $\vb{Q}	 = (\idm_\reg{w} \tensor \bra{0}_\reg{x}) \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} (\idm_\reg{w} \tensor \ket{0}_\reg{x})$.
+\\~
+
+Two important facts:
+\begin{itemize}
+\item $\Set{\vb{Q}, \idm_\reg{w}- \vb{Q}}$ form a POVM
+\item
+$\Tr\big(\bra{\psi}\vb{Q} \ket{\psi}\big) = \Tr\big(\bra{\psi}( \idm_\reg{w}- \vb{Q} )\ket{\psi}\big) = \frac{1}{2}$, \blue{independent of $\ket{\psi}$}. (Cuz 1st msg.\ of GI prot.\ is perfectly uniform.)
+\end{itemize}
+$\Rightarrow ~~ \vb{Q}  = \idm_\reg{w}- \vb{Q} = \frac{1}{2}\idm_\reg{w}$
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{An Important Lemma}
+Let $\vb{\Delta}_0 \coloneqq \idm_\reg{w} \tensor \ketbra{0}_\reg{x}$.
+\begin{itemize}
+\item 
+$\vb{\Delta}_0$ projects register $\reg{x}$ to all-$0$ qubits. 
+\item
+$\vb{\Delta}_0 = \vb{\Delta}^\dagger_0$ 
+\item
+$\vb{\Delta}_1 \coloneqq \idm_\reg{wx}  -  \vb{\Delta}_0$. The $\Set{\vb{\Delta}_0, \vb{\Delta}_1}$ form a POVM.
+\end{itemize}
+\begin{LemmaBox}[label={lem:technical}]{}
+ For all $\ket{\psi}\in \mathcal{H}(\reg{w})$, $\ket{\gamma_0} = \ket{\psi}_\reg{w}\ket{0}_\reg{x}$ is an eigenvector of $\vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} \vb{\Delta}_0$ with corresponding eigenvalue $\lambda = 1/2$.
+\end{LemmaBox}
+{\bf Proof.} Recall $\vb{Q}	 = (\idm_\reg{w} \tensor \bra{0}_\reg{x}) \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} (\idm_\reg{w} \tensor \ket{0}_\reg{x}) = \frac{1}{2}\idm_\reg{w}$.
+\begin{align*}
+\Rightarrow ~~ & 
+\vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} \vb{\Delta}_0 = (\idm_\reg{w}\tensor\ket{0}_\reg{x}) \vb{Q} (\idm_\reg{w}\tensor\bra{0}_\reg{x}) = \frac{1}{2} \idm_\reg{w} \tensor \ketbra{0}_\reg{x} \\
+\Rightarrow ~~ &  \forall \ket{\psi}, \vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} \vb{\Delta}_0 \underbrace{\ket{\psi}_\reg{w} \ket{0}_\reg{x}}_{\ket{\gamma_0}} = \big(\frac{1}{2} \idm_\reg{w} \tensor \ketbra{0}_\reg{x}\big) \underbrace{\ket{\psi}_\reg{w} \ket{0}_\reg{x}}_{\ket{\gamma_0}} = \frac{1}{2}\underbrace{\ket{\psi}_\reg{w} \ket{0}_\reg{x}}_{\ket{\gamma_0}}
+\end{align*}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Marriot-Watrous Lemma}
+{\fontsize{9pt}{0pt}\selectfont
+\begin{LemmaBox}[label={lem:marriot-watrous}]{Marriot-Watrous \cite{DBLP:conf/coco/MarriottW04}}
+Given unitary $\vb{U}$, proj.\ mnt.\ $\Set{\vb{\Pi}_0, \vb{\Pi}_1}$ and $\Set{\vb{\Delta}_0, \vb{\Delta}_1}$. 
+Assume $\ket{\gamma_0}$ is an evec.\ of $\vb{\Delta}_0\vb{U}^\dagger\vb{\Pi}_0\vb{U}\vb{\Delta}_0$ with eval.\ $\egval$. Define 
+$$\ket{\delta_0} \coloneqq \frac{\vb{\Pi}_0\vb{U}\ket{\gamma_0}}{\sqrt{\egval}}, ~~ \ket{\delta_1} \coloneqq \frac{\vb{\Pi}_0\vb{U}\ket{\gamma_0}}{\sqrt{1-\egval}},~~ \ket{\gamma_1} \coloneqq \frac{\vb{\Delta}_1\vb{U}^\dagger\ket{\delta_0}}{\sqrt{1-\egval}}.$$
+Then, $\braket{\gamma_0}{\gamma_1} = \braket{\delta_0}{\delta_1} = 0$ and 
+\begin{align*}
+\vb{U}\ket{\gamma_0} = \sqrt{\egval}\ket{\delta_0} + \sqrt{1 - \egval}\ket{\delta_1}~~~~~~~~~~~~ & \vb{U}^\dagger\ket{\delta_0} = \sqrt{\egval}\ket{\gamma_0} + \sqrt{1-\egval}\ket{\gamma_1} \\
+\vb{U}\ket{\gamma_1} = \sqrt{1-\egval}\ket{\delta_0} - \sqrt{\egval}\ket{\delta_1} ~~~~~~~~~~~~ & \vb{U}^\dagger\ket{\delta_1} = \sqrt{1-\egval}\ket{\gamma_0} - \sqrt{\egval}\ket{\gamma_1} 
+\end{align*}
+
+\end{LemmaBox}}
+\blue{(draw the diagram)}
+$$
+\mqty{
+\ket{\gamma_0} & ~~~~~~~~~~~~~~~ & \green{\ket{\delta_0}} & ~~~~~~~~~~~~~~~ & \ket{\gamma_0} & ~~~~~~~~~~~~~~~ & \green{\ket{\delta_0}} & ~~~~~~~~~~~~~~~ & \ket{\gamma_0} &\cdots\\ 
+~ & ~ & ~ & ~ & ~ \\
+~ & ~ & ~ & ~ & ~\\
+~ & ~ & ~ & ~ & ~\\
+~ & ~~~~~~~~~~~~~~~ & \ket{\delta_1} & ~~~~~~~~~~~~~~~ & \red{\ket{\gamma_1}} & ~~~~~~~~~~~~~~~ & \ket{\delta_1} &  ~~~~~~~~~~~~~~~ & \red{\ket{\gamma_0}} &\cdots
+} 
+$$
+\end{frame}
+
+
+\begin{frame}
+\frametitle{In Our Setting: Marriot-Watrous $+$ Post-Mnt Selection}
+In our setting, we have $\vb{U} = \vb{V}\vb{T}$, $\lambda = 1/2$, and $\ket{\gamma_0} = \ket{\psi}_\reg{w} \ket{0}_\reg{x}$\\[0.5em]
+
+Lemma \ref{lem:marriot-watrous}~ $\Rightarrow ~ \ket{\gamma_0} = \frac{1}{\sqrt{2}}\ket{\delta_0} + \frac{1}{\sqrt{2}}\ket{\delta_1}$, and the following:
+{\fontsize{10pt}{0pt}\selectfont$$
+\ket{\delta_0} = \sqrt{2}\vb{\Pi}_0 \vb{V} \vb{T}\ket{\gamma_0}, ~~~~\vb{T}^\dagger \vb{V}^\dagger \ket{\delta_1} = \frac{1}{\sqrt{2}}\ket{\gamma_0} - \frac{1}{\sqrt{2}}\ket{\gamma_1}, ~~~~\vb{VT} (\frac{1}{\sqrt{2}}\ket{\gamma_0} + \frac{1}{\sqrt{2}}\ket{\gamma_1}) = \ket{\delta_0}
+$$}
+
+% $~~\ket{\delta_1} = \sqrt{2}\vb{\Pi}_1 \vb{V} \vb{T}\ket{\gamma_0}, ~~ \ket{\gamma_1} = \sqrt{2}\vb{\Delta}_1 \vb{T}^\dagger \vb{V}^\dagger\ket{\gamma_0}$
+Starting with $\ket{\gamma_0} \rightarrow \vb{VT} \ket{\gamma_0} \rightarrow$ measurement $\Set{\vb{\Pi}_0, \vb{\Pi}_1}$:
+\begin{itemize}
+\item
+w.p.\ $1/2$, it is $\green{\ket{\delta_0}}$ --- we are done!
+\item
+w.p.\ $1/2$, it is $\ket{\delta_1}$
+\begin{itemize}
+\item Key observation: $\vb{T}^\dagger \vb{V}^\dagger \ket{\delta_1} = \frac{1}{\sqrt{2}}\ket{\gamma_0} - \frac{1}{\sqrt{2}}\ket{\gamma_1}$
+\item \red{If we can flip the phase of the 2nd term} $\Rightarrow ~~\frac{1}{\sqrt{2}}\ket{\gamma_0} + \frac{1}{\sqrt{2}}\ket{\gamma_1}$.
+\item
+Then, simply do $\vb{VT}(\frac{1}{\sqrt{2}}\ket{\gamma_0} + \frac{1}{\sqrt{2}}\ket{\gamma_1}) = \green{\ket{\delta_0}}$
+\end{itemize}
+\end{itemize}
+\red{Yes, we can!} (next slide)
+\end{frame}
+
+\begin{frame}
+\frametitle{Phase Flip for the 2nd Term}
+
+We want: $\frac{1}{\sqrt{2}}\ket{\gamma_0} - \frac{1}{\sqrt{2}}\ket{\gamma_1} ~~~\rightarrow~~~ \frac{1}{\sqrt{2}}\ket{\gamma_0} + \frac{1}{\sqrt{2}}\ket{\gamma_1}$ \\[0.5em]
+
+Recall the following 
+\begin{itemize}
+\item
+$\ket{\gamma_0} = \ket{\psi}_\reg{w} \ket{0}_\reg{x}$ and $\vb{\Delta}_0 = \idm_\reg{w}\tensor\ketbra{0}_\reg{x}$
+\item
+$\Rightarrow ~~ \vb{\Delta}_0 \ket{\gamma_0} = \ket{\gamma_0}$
+\item
+Lemma \ref{lem:marriot-watrous} says $\ket{\gamma_1} = \sqrt{2}\vb{\Delta}_1 \vb{T}^\dagger \vb{V}^\dagger \ket{\delta_0} ~~\Rightarrow ~~ \vb{\Delta}_0 \ket{\gamma_1} = 0$
+\end{itemize}
+
+Therefore, it is not hard to come up with the following idea:
+\begin{align*}
+\underbrace{(2\vb{\Delta}_0 - \idm_\reg{wx})}_{=\vb{\Delta}_0 - \vb{\Delta}_1} (\frac{1}{\sqrt{2}}\ket{\gamma_0} - \frac{1}{\sqrt{2}}\ket{\gamma_1})
+&= \frac{2}{\sqrt{2}}\vb{\Delta}_0 \ket{\gamma_0} - \frac{2}{\sqrt{2}}\vb{\Delta}_0 \ket{\gamma_1} - \frac{1}{\sqrt{2}}\ket{\gamma_0} + \frac{1}{\sqrt{2}}\ket{\gamma_1} \\
+&= \frac{2}{\sqrt{2}}\ket{\gamma_0} - 0 - \frac{1}{\sqrt{2}}\ket{\gamma_0} + \frac{1}{\sqrt{2}}\ket{\gamma_1} \\
+&= \frac{1}{\sqrt{2}}\ket{\gamma_0} + \frac{1}{\sqrt{2}}\ket{\gamma_1}
+\end{align*}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Summarizing the Watrous Simulator}
+\begin{itemize}
+\item
+Start with $\ket{\gamma_0}_\reg{xw}=\ket{\psi}_\reg{x} \ket{0}_\reg{w}$
+\item
+Perform $\vb{VT}\ket{\gamma_0}_\reg{xw}$
+\item
+Perform measurement $\Set{\vb{\Pi}_0, \vb{\Pi}_1}$
+\begin{itemize}
+\item If outcome is 0 --- guessed correctly (in $\green{\ket{\delta_0}}$). Go next step.
+\item Otherwise, we are in $\ket{\delta_1} = \sqrt{2}\vb{\Pi}_1\vb{VT}\ket{\gamma_0}$.
+\begin{itemize}
+\item
+Perform $\vb{T}^\dagger \vb{V}^\dagger \ket{\delta_1} = \frac{1}{\sqrt{2}}\ket{\gamma_0} - \frac{1}{\sqrt{2}}\ket{\gamma_1}$
+\item
+Perform $(2\vb{\Delta}_0 - \idm_\reg{wx})(\frac{1}{\sqrt{2}}\ket{\gamma_0} - \frac{1}{\sqrt{2}}\ket{\gamma_1}) = \frac{1}{\sqrt{2}}\ket{\gamma_0} + \frac{1}{\sqrt{2}}\ket{\gamma_1}$
+\item
+Perform $ \vb{VT}(\frac{1}{\sqrt{2}}\ket{\gamma_0} + \frac{1}{\sqrt{2}}\ket{\gamma_1})= \green{\ket{\delta_0}}$. Go next step.
+\end{itemize}
+\end{itemize}
+\item
+Sim can finish the last round as the honest prover. 
+\end{itemize}
+\end{frame}
 
 
 \begin{frame}%[allowframebreaks]

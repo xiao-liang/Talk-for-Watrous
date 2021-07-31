@@ -1,5 +1,6 @@
 \ProvidesPackage{Xiao-slides}
 
+\definecolor{BeamerBlue}{rgb}{0.2,0.2,0.7}
 
 
 \setbeamertemplate{footline}[frame number]{}
@@ -14,32 +15,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage{xspace} 
  
+
+
+
+
 % To aligh on both sides 
 \usepackage{ragged2e}
 \justifying
-
-
-% Define macro for ceil and floor
-\newcommand\floor[1]{\lfloor#1\rfloor}
-\newcommand\ceil[1]{\lceil#1\rceil}
-
-
-% tcolorbox macro
-\usepackage[most]{tcolorbox}
-\newtcolorbox{mybox}[2][]
-{
-  colframe = gray!10,
-  colback  = gray!2,
-  coltitle = blue!20!blue,  
-  title    = #2,
-  arc=0pt,
-  outer arc=0pt,
-  boxrule=1.5pt,
-  left=0mm,
-  right=0pt,
-}
-
- 
 
 % hyper link property
 \usepackage{hyperref}
@@ -49,132 +31,78 @@
     filecolor=magenta,      
     urlcolor=cyan,
 }
+
 \usepackage{relsize}
 \renewcommand*{\UrlFont}{\ttfamily\relsize{-2}}
 
-
-
-%\usepackage{xcolor}
-\newcommand{\red}[1]{\begingroup\color{red}#1\endgroup}
-
-
-
-
-
-%-- Crypto Symbols -------------------------
-
-\newcommand{\ZK}{\ensuremath{\mathcal{ZK}}\xspace}
-
-
-\newcommand{\CRHF}{\ensuremath{\mathsf{CRHF}}\xspace}
-
-\newcommand{\cZK}{\ensuremath{c\mathcal{ZK}}\xspace}
-
-\newcommand{\Dstng}{\ensuremath{\mathcal{D}}\xspace}
-
-
-\newcommand{\NP}{\ensuremath{\mathcal{NP}}\xspace}
-\newcommand{\BPP}{\ensuremath{\mathcal{BPP}}\xspace}
-
-
-\newcommand{\IP}{\ensuremath{\mathcal{IP}}\xspace}
-
-\newcommand{\Set}[1]{\ensuremath{\{ #1 \}}\xspace}
-
-
-% -- Language
-\newcommand{\Lang}{\ensuremath{\mathcal{L}}\xspace}
-
-% -- negligible
-\newcommand{\negl}{\ensuremath{\mathsf{negl}}\xspace}
-
-\newcommand{\OWF}{\ensuremath{\mathsf{OWF}}\xspace}
-
-
-% -- Probabilistic Polynomial Time
-\newcommand{\PPT}{\ensuremath{\mathrm{PPT}}\xspace}
-% -- Randomly pick
-\newcommand{\pick}{\ensuremath{\xleftarrow{\$}}\xspace}
-
-
-% -- security parameter
-\newcommand{\SecPar}{\ensuremath{\mathsf{\lambda}}\xspace}
-\newcommand{\Sim}{\ensuremath{\mathsf{Sim}}\xspace}
-
-
-% -- indisginuishability
-\newcommand{\cind}{\ensuremath{\stackrel{\text{c}}{\approx}}\xspace}
-\newcommand{\sind}{\ensuremath{\stackrel{\text{s}}{\approx}}\xspace}
-\newcommand{\idind}{\ensuremath{\stackrel{\text{i.d.}}{\approx}}\xspace}
+\usepackage{amsmath}
+\usepackage{anyfontsize}
+\usepackage{bbm}
+\usepackage{mathtools}
+\usepackage{physics}
 
 
 
+% Define macro for ceil and floor
+\newcommand\floor[1]{\lfloor#1\rfloor}
+\newcommand\ceil[1]{\lceil#1\rceil}
 
 
-% -- file specific symbols ---------------------
-\newcommand{\A}{\ensuremath{\mathsf{Alice}}\xspace}
-\newcommand{\amount}{\ensuremath{\mathsf{amount}}\xspace}
+% Cleveref does not work with beamer
+% \usepackage[nameinlink]{cleveref}
 
-% -- angle bracket
-\newcommand{\AglB}[1]{\ensuremath{\langle #1 \rangle}}
+% tcolorbox macro
+\usepackage[many]{tcolorbox}
 
-% -- Concurrent Parameter 
-\newcommand{\ConPar}{\ensuremath{n}}
-% -- Round Parameter 
-\newcommand{\RouPar}{\ensuremath{k}}
+\newcounter{GlobalTcboxCounter}
+
+\newtcolorbox{mybox}[2][]
+{
+  colframe = gray!10,
+  colback  = gray!2,
+  coltitle = blue!85!black,  
+  title    = #2,
+  arc=0pt,
+  outer arc=0pt,
+  boxrule=1.5pt,
+  left=0mm,
+  right=0pt,
+}
+
+
+
+\newtcolorbox
+[use counter=GlobalTcboxCounter,
+% number within=section,
+]{LemmaBox}[2][]
+{
+  title    = Lemma~\thetcbcounter: #2,#1,
+  fonttitle=\scshape,
+  enforce breakable, % breakable across pages
+  colframe = gray!10,
+  colback  = gray!2,
+  coltitle = BeamerBlue, 
+  % colframe = black,
+  % coltitle = black,
+  % colbacktitle = white, 
+  coltext  = black, 
+  colback  = white,
+  arc=0pt,
+  outer arc=0pt,
+  boxrule=1.5pt,
+  left=0pt, % left margin
+  right=0pt % right margin
+}
+
+
+ 
 
 
 
 
-\newcommand{\B}{\ensuremath{\mathsf{Bob}}\xspace}
-\newcommand{\TimeTag}{\ensuremath{\mathsf{TimeTag}}\xspace}
-
-\newcommand{\Sen}{\ensuremath{\mathsf{Sender}}\xspace}
-\newcommand{\Seq}[1]{\ensuremath{\{ #1 \}}\xspace}
-
-
-\newcommand{\Rec}{\ensuremath{\mathsf{Receiver}}\xspace}
-
-
-% -- Commitment scheme related macros
-\newcommand{\Com}{\ensuremath{\mathsf{Com}}\xspace}
-\newcommand{\PBCom}{\ensuremath{\mathsf{PB}\text{-}\mathsf{Com}}\xspace}
-\newcommand{\PHCom}{\ensuremath{\mathsf{PH}\text{-}\mathsf{Com}}\xspace}
-\newcommand{\SHCom}{\ensuremath{\mathsf{SH}\text{-}\mathsf{Com}}\xspace}
 
 
 
-\newcommand{\depth}{\ensuremath{\mathsf{depth}}\xspace}
-
-
-\newcommand{\len}{\ensuremath{\ell}}
-\newcommand{\tran}{\ensuremath{\mathsf{hist}}\xspace}
-\newcommand{\hist}{\ensuremath{\mathcal{T}}\xspace}
 
 
 
-\newcommand{\optrslifo}{\ensuremath{\mathsf{OPT^{LIFO}_{RS}}}\xspace}
-\newcommand{\pfifo}{\ensuremath{p\textrm{-}\mathsf{FIFO}}\xspace}
-\newcommand{\plifo}{\ensuremath{p\textrm{-}\mathsf{LIFO}}\xspace}
-\newcommand{\lifo}{\ensuremath{\mathsf{LIFO}}\xspace}
-\newcommand{\fifo}{\ensuremath{\mathsf{FIFO}}\xspace}
-
-
-\newcommand{\puni}{\ensuremath{p\textrm{-}\mathsf{Uniform}}\xspace}
-\newcommand{\sch}{\ensuremath{\mathsf{sch}}\xspace}
-\newcommand{\np}{\ensuremath{\mathcal{NP}}\xspace}
-\newcommand{\iid}{\ensuremath{\mathsf{iid}}\xspace}
-\newcommand{\optrs}{\ensuremath{\mathsf{OPT_{RS}}}\xspace}
-\newcommand{\totalrs}{\ensuremath{\mathsf{total_{RS}}}\xspace}
-\newcommand{\poly}{\ensuremath{\mathsf{poly}}\xspace}
-\newcommand{\view}{\ensuremath{\mathsf{view}}\xspace}
-\newcommand{\aux}{\ensuremath{\mathsf{aux}}\xspace}
-\newcommand{\st}{\ensuremath{\mathsf{st}}\xspace}
-\newcommand{\abort}{\ensuremath{\mathsf{abort}}\xspace}
-\newcommand{\naiverecurse}{{\sf na\"{\i}ve\_recurse}}
-\newcommand{\czk}{\ensuremath{\mathrm{c}\mathcal{ZK}}\xspace}
-\newcommand{\zk}{\ensuremath{\mathcal{ZK}}\xspace}
-
-% -- the vertical bar for conditional probability
-\newcommand\given[1][\big]{\:#1\vert\:}
-\newcommand{\Prob}[2][]{\ensuremath{\Pr#1[ #2 #1]}}
