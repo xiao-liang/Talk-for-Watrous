@@ -20,7 +20,8 @@
  
 
 % \frame{\titlepage}
-
+{ % these braces make the change local to the single frame
+   \setbeamertemplate{footline}{\centerline{\scriptsize Git repo for these slides and {\LaTeX} source code: \href{https://github.com/xiao-liang/Talk-for-Watrous}{https://github.com/xiao-liang/Talk-for-Watrous}}} % add a footnote for this frame only
 \begin{frame}
 \vspace{4em}
 \centerline{\Large\beamerblue{The Watrous Post-Quantum Zero-Knowledge Proof}}
@@ -35,10 +36,9 @@
 \centerline{\small and}
 \centerline{\small\textsc{Max-Planck Institute (Security and Privacy)}}
 \vspace{1em}
-\centerline{\small Git repo for these slides and {\LaTeX} source code:}
-% \centerline{\small\today}
+\centerline{\small Aug.\ 2nd, 2021}
 \end{frame}
-
+}
 
 \begin{frame}
 \frametitle{Post-Quantum ZK for NP}
