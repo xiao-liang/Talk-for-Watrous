@@ -1,7 +1,8 @@
-% tcolorbox macro
-% Usage: \begin{mybox}{Box_title} contents \end{mybox}
-
-
+% Comment Macro
+\newcommand{\xiao}[1]{{\color{Red}XIAO: #1}}
+\newcommand{\gray}[1]{{\color{Gray} #1}}
+\newcommand{\green}[1]{{\color{ForestGreen} #1}}
+\newcommand{\beamerblue}[1]{{\color{BeamerBlue}#1}\xspace}
 
 % Macros:
 % Case-insensitive, Alphabetical ordering
@@ -12,7 +13,6 @@
 \newcommand{\BBCom}{\ensuremath{\mathsf{BBCom}}\xspace}
 \newcommand{\BBOWFP}{\ensuremath{\mathsf{BB}\text{-}\mathsf{OWFP}}\xspace}
 \newcommand{\BBProve}{\ensuremath{\mathsf{BBProve}}\xspace}
-\newcommand{\beamerblue}[1]{{\color{BeamerBlue}#1}\xspace}
 \newcommand{\Bdv}{\ensuremath{\mathcal{B}}\xspace}
 \newcommand{\bits}{\ensuremath{\{0,1\}}\xspace}
 \newcommand{\blue}[1]{{\color{NavyBlue} #1}}
@@ -36,6 +36,8 @@
 \newcommand{\Easy}{\ensuremath{\mathsf{Easy}}\xspace}
 \newcommand{\ECC}{\ensuremath{\mathsf{ECC}}\xspace}
 \newcommand{\Enc}{\ensuremath{\mathsf{Enc}}\xspace}
+\renewcommand{\epsilon}{\ensuremath{\varepsilon}\xspace}
+
 \newcommand{\Error}{\ensuremath{\delta}\xspace}
 \newcommand{\Eval}{\ensuremath{\mathsf{Eval}}\xspace}
 \newcommand{\egval}{\ensuremath{\mathsf{\lambda}}\xspace}
@@ -50,8 +52,7 @@
 
 \newcommand{\given}[1][\big]{\:#1\vert\:}
 \newcommand{\Good}{\ensuremath{\mathsf{Good}}\xspace}
-\newcommand{\gray}[1]{{\color{Gray} #1}}
-\newcommand{\green}[1]{{\color{ForestGreen} #1}}
+
 
 \newcommand{\Ham}{\ensuremath{\Delta}\xspace}
 \newcommand{\Hard}{\ensuremath{\mathsf{Hard}}\xspace}
@@ -126,7 +127,7 @@
 \newcommand{\VSSCom}{\ensuremath{\mathsf{VSSCom}}\xspace}
 \newcommand{\VSS}{\ensuremath{\mathsf{VSS}}\xspace}
 
-\newcommand{\xiao}[1]{{\noindent \color{red}XIAO: #1}}
+
 \newcommand{\xor}{\ensuremath{\oplus}\xspace}
 
 \newcommand{\ZK}{\ensuremath{\mathsf{ZK}}\xspace}

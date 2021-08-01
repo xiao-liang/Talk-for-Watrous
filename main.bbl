@@ -1,4 +1,12 @@
-\begin{thebibliography}{MW04}
+\begin{thebibliography}{GMW86}
+
+\bibitem[GMW86]{DBLP:conf/focs/GoldreichMW86}
+Oded Goldreich, Silvio Micali, and Avi Wigderson.
+\newblock Proofs that yield nothing but their validity and a methodology of
+  cryptographic protocol design (extended abstract).
+\newblock In {\em 27th Annual Symposium on Foundations of Computer Science,
+  Toronto, Canada, 27-29 October 1986}, pages 174--187. {IEEE} Computer
+  Society, 1986.
 
 \bibitem[MW04]{DBLP:conf/coco/MarriottW04}
 Chris Marriott and John Watrous.
@@ -6,6 +14,15 @@ Chris Marriott and John Watrous.
 \newblock In {\em 19th Annual {IEEE} Conference on Computational Complexity
   {(CCC} 2004), 21-24 June 2004, Amherst, MA, {USA}}, pages 275--285. {IEEE}
   Computer Society, 2004.
+
+\bibitem[Unr16]{DBLP:conf/eurocrypt/Unruh16}
+Dominique Unruh.
+\newblock Computationally binding quantum commitments.
+\newblock In Marc Fischlin and Jean{-}S{\'{e}}bastien Coron, editors, {\em
+  Advances in Cryptology - {EUROCRYPT} 2016 - 35th Annual International
+  Conference on the Theory and Applications of Cryptographic Techniques,
+  Vienna, Austria, May 8-12, 2016, Proceedings, Part {II}}, volume 9666 of {\em
+  Lecture Notes in Computer Science}, pages 497--527. Springer, 2016.
 
 \bibitem[Wat06]{DBLP:conf/stoc/Watrous06}
 John Watrous.
