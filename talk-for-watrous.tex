@@ -85,7 +85,7 @@ Explicit connection to \cite{DBLP:conf/coco/MarriottW04}
 \item
 Simple, ad hoc proof
 \item
-This talk mainly focus on this version
+This talk mainly focuses on this version
 \item
 The notation herein is consistent with this version
 \end{itemize}
@@ -97,7 +97,7 @@ Abstracts out a general quantum rewinding lemma
 \item
 Hides the connection with Marriot-Watrous
 \item
-we'll also see the high-level idea of this version 
+We'll also see the high-level idea of this version 
 \end{itemize}
 \end{frame}
 
@@ -156,7 +156,7 @@ $P$ sends $\tau = \pi \circ \sigma^a$
 {\bf $V$'s decision:} accept iff $\tau(G_a) = H$
 \\~
 
-{\bf Classical Sim:} guess the bit $a$
+{\bf Classical Sim:} guess the bit $b$. Set $H = \pi(G_b)$. Win if $b == a$.
 
 \end{frame}
 
@@ -168,7 +168,7 @@ $P$ sends $\tau = \pi \circ \sigma^a$
 
 {\bf Model a Quantum $V^*$:} circuit family $\Set{\vb{V}_H}_{ H \in \mathcal{G}_\SecPar}$, auxiliary input $\ket{\psi}$
 \begin{itemize}
-	\item receives $H$ from P
+	\item Receives $H$ from P
 	\item
 	Perform $\vb{V}_H \ket{\psi}_\reg{w} \ket{0}_\reg{v} \ket{0}_\reg{a} = \alpha_0 \ket{\psi_0}_\reg{wv} \ket{0}_\reg{a} + \alpha_1 \ket{\psi_1}_\reg{wv} \ket{1}_\reg{a}$ 
 	\begin{itemize}
@@ -187,7 +187,7 @@ View the protocol through a quantum lens:
 	\item
 	The full space $\reg{w} \tensor \reg{x}$, where $\reg{x} = \reg{v} \tensor \reg{a} \tensor \reg{y} \tensor \reg{b} \tensor \reg{z}$
 \item
-$P$ performs $$\vb{T} \ket{0}_\reg{YBZ} = \frac{1}{\sqrt{2\SecPar!}} \sum_{b\in \bits} \sum_{\pi \in S_\SecPar} \ket{\pi(G_b)}_\reg{y} \ket{b}_\reg{B} \ket{\pi}_\reg{z}$$
+Sim performs \blue{(classical Sim in superposition)} $$\vb{T} \ket{0}_\reg{YBZ} = \frac{1}{\sqrt{2\SecPar!}} \sum_{b\in \bits} \sum_{\pi \in S_\SecPar} \ket{\pi(G_b)}_\reg{y} \ket{b}_\reg{B} \ket{\pi}_\reg{z}$$
 \item
 $V$ apply $\vb{V} = \sum_{H \in \mathcal{G}} \vb{V}_H \tensor \ketbra{H}_\reg{y} \tensor \idm_\reg{bz}$ on the full space $\reg{w}\tensor\reg{x}$
 \begin{itemize}
@@ -200,7 +200,9 @@ $$ \alpha_{00}\ket{\psi_{00}}\ket{00}_\reg{ab} +  \alpha_{01}\ket{\psi_{01}}\ket
 \end{itemize}
 \end{itemize}
 In summary, the protocol up to step 2 is:
-$$\underbrace{\vb{V}\vb{T}}_{\text{on}~\reg{w}\tensor \reg{x}} (\ket{\psi}_\reg{w} \ket{0}_{\reg{x}= \reg{VAYBZ}}) ~~\Iff~~ \underbrace{\vb{V}\vb{T}(\idm_\reg{w} \tensor \ket{0}_\reg{x})}_{\text{only on}~\reg{w}} \ket{\psi}$$
+\begin{equation} \label{eq:half-Q}
+\underbrace{\vb{V}\vb{T}}_{\text{on}~\reg{w}\tensor \reg{x}} (\ket{\psi}_\reg{w} \ket{0}_{\reg{x}= \reg{VAYBZ}}) ~~\Iff~~ \underbrace{\vb{V}\vb{T}(\idm_\reg{w} \tensor \ket{0}_\reg{x})}_{\text{only on}~\reg{w}} \ket{\psi}
+\end{equation}
 \end{frame}
 
 \begin{frame}
@@ -215,14 +217,14 @@ work on the full space $\reg{w}\tensor\reg{x}$. Just tensor identities on regist
 ~\\
 
 
-Performing $\Set{\vb{\Pi}_0, \vb{\Pi}_1}$ on $\vb{V}\vb{T}\ket{\psi}_\reg{w}\ket{0}_\reg{x}$ boils down to:
+Performing $\Set{\vb{\Pi}_0, \vb{\Pi}_1}$ on $\vb{V}\vb{T}\ket{\psi}_\reg{w}\ket{0}_\reg{x}$:
 \begin{itemize}
-\item the probability for outcome $0$ is 
-$\Tr\big(\bra{\psi}\vb{Q} \ket{\psi}\big)$
-\item the probability for outcome $1$ is 
-$\Tr\big(\bra{\psi}( \idm_\reg{w}- \vb{Q} )\ket{\psi}\big)$
+\item w.p.\ 
+$\Tr\big(\bra{\psi}\vb{Q} \ket{\psi}\big)$, the outcome is $0$.
+\item w.p.\  
+$\Tr\big(\bra{\psi}( \idm_\reg{w}- \vb{Q} )\ket{\psi}\big)$, the outcome is $1$.
 \end{itemize}
-where $\vb{Q}	 = (\idm_\reg{w} \tensor \bra{0}_\reg{x}) \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} (\idm_\reg{w} \tensor \ket{0}_\reg{x})$.
+where $\vb{Q}	 = (\idm_\reg{w} \tensor \bra{0}_\reg{x}) \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} (\idm_\reg{w} \tensor \ket{0}_\reg{x})$. (See Expression \eqref{eq:half-Q}.)
 \\~
 
 Two important facts:
@@ -377,12 +379,15 @@ Sim can finish the last round as the honest prover.
 The graph-3-coloring (G3C) problem is \NP-complete
 
 \item
-will use the G3C classical ZK proof from \cite{DBLP:conf/focs/GoldreichMW86}
+Start point: the G3C classical ZK proof from \cite{DBLP:conf/focs/GoldreichMW86}
+\end{itemize}
 
+Caveats:
+\begin{itemize}
 \item
 $\Pr[\text{Guess correctly}] = \frac{1}{m}$, where $m=$ \# edges. 
 \item
-$\Pr[\text{Guess correctly}] ~~~\bot~~~ \ket{\psi}$?
+$\Pr[\text{Guess correctly}] ~~~\perp~~~ \ket{\psi}$?
 \begin{itemize}
 \item
 1st msg using perfect-binding (PB) $\Com$
@@ -391,7 +396,7 @@ What about binding? --- Collapse-binding suffices \cite{DBLP:conf/eurocrypt/Unru
 \item
 We assume an ideal $\Com$ for simplicity: perfect-hiding and perfectly-binding
 \item
-Extends to PB and CH $\Com$ later 
+Extends to comp.-hiding $\Com$ later 
 \end{itemize} 
 \end{itemize}
 \end{frame}
@@ -403,22 +408,22 @@ Extends to PB and CH $\Com$ later
 Key ingredients for the GI simulator:
 \begin{itemize}
 \item
-Define an operator: $\vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} \vb{\Delta}_0$ ($\eqqcolon \vb{M}$)
+Define an operator: $\vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} \vb{\Delta}_0$ ($\eqqcolon \vb{M}$) 
 \item
-An technical Lemma \ref{lem:technical}: $\lambda=\frac{1}{2}$ ~~$(\bot~~ \ket{\psi})$
+An technical Lemma \ref{lem:technical}: $\lambda=\frac{1}{2}$ ~~$(\perp~~ \ket{\psi})$
 \item
 Invoke Marriot-Watrous Lemma \ref{lem:marriot-watrous} with $\lambda=\frac{1}{2}$:
 \begin{itemize}
 \item Voil\`a \dSmiley[1.2]! We can get $\green{\ket{\delta_0}}$ within $\le 2$ steps
 \end{itemize}
 \end{itemize}
-
+~\\
 What will change for the G3C protocol?
 \begin{itemize}
 \item
 $\vb{M}$ defined as before ($\vb{T}$ modified in the natural way)
 \item
-Lemma \ref{lem:technical}: $\lambda=\frac{1}{m}$ ~~$(\bot~~ \ket{\psi})$
+Lemma \ref{lem:technical}: $\lambda=\frac{1}{m}$ ~~$(\perp~~ \ket{\psi})$
 \item
 Invoke Marriot-Watrous Lemma \ref{lem:marriot-watrous} with $\lambda=\frac{1}{m}$:
 \begin{itemize}
@@ -454,7 +459,7 @@ $\mqty{
 	Measure $\Set{\vb{\Pi}_0, \vb{\Pi}_1}$ at each $\ket{\delta}$, if results in $\ket{\delta_1}$:
 	\begin{itemize}
 	\item
-	$\vb{U} (2 \vb{\Delta} - \idm) \vb{U}^\dagger \ket{\delta_1} = 2\sqrt{p(1-p)}\ket{\delta_0} + (1-2p)\ket{\delta_1} $
+	$\vb{U} (2 \vb{\Delta}_0 - \idm) \vb{U}^\dagger \ket{\delta_1} = 2\sqrt{p(1-p)}\ket{\delta_0} + (1-2p)\ket{\delta_1} $
 	\end{itemize}
 \item Measure $\Set{\vb{\Pi}_0, \vb{\Pi}_1}$. Go to $\ket{\delta_1}$ w.p.\ $(1-2p)$.
 \item Keep failing after $t$ iteration: $1- (1-p)(1-2p)^t$. Then Chernoff bound. 
@@ -464,12 +469,12 @@ $\mqty{
 \begin{frame}
 \frametitle{The General Quantum Rewinding Lemma (Exact)}
 \begin{LemmaBox}[label={lem:quantum-rewinding}]{Exact Quantum Rewinding \cite{DBLP:journals/siamcomp/Watrous09}}
-$\vb{Q}$ is a QC works on $\ket{\psi}$ and with $\Pr[\mathsf{success}] = p ~~(\bot ~\ket{\psi})$ outputs $\ket{\delta_0}$. Then, for any $\epsilon>0$, there exists another QC $\vb{R}$ of size
+$\vb{Q}$ is a QC works on ${\ket{\psi}}$ and with $\Pr[\mathsf{success}] = p ~~(\perp ~\ket{\psi})$ outputs $\green{\ket{\delta_0}}$. Then, for any $\epsilon>0$, there exists another QC $\vb{R}$ of size
 $$O\left(\frac{\log(1/\epsilon)}{p(1-p)} \cdot \mathsf{size}(\vb{Q})\right)$$
-such that for every input $\ket{\psi}$, the output $\rho$ of $\vb{R}$ satisfies $\Tr(\rho\ketbra{\delta_0}) \ge 1- \epsilon$.
+such that for every input $\ket{\psi}$, the output $\rho$ of $\vb{R}$ satisfies $\Tr(\rho \green{\ketbra{\delta_0}}) \ge 1- \epsilon$.
 \end{LemmaBox}
 \begin{itemize}
-	\item ``Exact'' refers to the face that $p~~\bot~~\ket{\psi}$.
+	\item ``Exact'' refers to the face that $p~~\perp~~\ket{\psi}$.
 \item
 The $\frac{\log(1/\epsilon)}{p(1-p)}$ is due to Chernoff bound.
 \item 
@@ -480,15 +485,34 @@ For the trace, the closer to 1, the better.
 \end{frame}
 
 \begin{frame}
+\frametitle{G3C ZK with Comp.-Hiding \Com}
+\begin{itemize}
+\item
+Sim's 1st msg.\ $\cind$ Prover's 1st msg.\
+\item
+$V^*$'s challenge $a$ $\not\perp$ the 1st msg.\
+\item
+In Lemma \ref{lem:quantum-rewinding}, $\Pr[\mathsf{success}] = p(\ket{\psi})$. 
+\begin{itemize}
+\item
+$p(\ket{\psi})$ jiggles within an negl.\ small interval.
+\end{itemize}
+\item
+Need a version of Lemma \ref{lem:quantum-rewinding} allowing small perturbations
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
 \frametitle{The Version Allowing Small Perturbations}
 
 \begin{LemmaBox}[label={lem:quantum-rewinding-perturbation}]{Quantum Rewinding with Small Perturbations {\cite[Sec. 4.2]{DBLP:journals/siamcomp/Watrous09}}}
-Let $\vb{Q}$, $\ket{\psi}$, and $\ket{\delta_0}$ as before. But $\Pr[\mathsf{success}] = p(\ket{\psi})$ now depends on $\ket{\psi}$. Let $p_0, q \in (0,1)$ and $\epsilon \in (0,1/2)$ be real numbers such that\\[0.3em]
+Let $\vb{Q}$, $\ket{\psi}$, and $\green{\ket{\delta_0}}$ as before. But $\Pr[\mathsf{success}] = p(\ket{\psi})$ now depends on $\ket{\psi}$. Let $p_0, q \in (0,1)$ and $\epsilon \in (0,1/2)$ be real numbers such that\\[0.3em]
 \centerline{$(1).~\abs{p(\psi) - q} < \epsilon~~~~~~~(2).~p_0 \le p(\psi)~~~~~~~(3).~p_0(1-p_0) \le q(1-q)$}\\[0.4em]
 Then, for any $\epsilon>0$, there exists another QC $\vb{R}$ of size
 $O\left(\frac{\log(1/\epsilon)}{\blue{p_0(1-p_0)}} \cdot \mathsf{size}(\vb{Q})\right)$
 such that for every input $\ket{\psi}$, the output $\rho$ of $\vb{R}$ satisfies:\\[-0.5em]
-$$\Tr(\rho\ketbra{\delta_0}) \ge 1- \blue{16\epsilon\frac{\log^2(1/\epsilon)}{p^2_0(1-p_0)^2}}.$$
+$$\Tr(\rho \green{\ketbra{\delta_0}}) \ge 1- \blue{16\epsilon\frac{\log^2(1/\epsilon)}{p^2_0(1-p_0)^2}}.$$
 \end{LemmaBox}
 
 Proof at a high-level:
@@ -523,7 +547,7 @@ Define a unitary $\vb{N}$ such that for all $i\in [\mathsf{dim}]$:\\[0.2em]
 {\small
 $\blue{\sqrt{p(\ket{\psi_i})}} \ket{\delta_0(\ket{\psi_i})} + \blue{\sqrt{1 - p(\ket{\psi_i})}}\ket{\delta_1(\ket{\psi_i})} \rightarrow \blue{\sqrt{q}} \ket{\delta_0(\ket{\psi_i})} + \blue{\sqrt{1 - q}}\ket{\delta_1(\ket{\psi_i})}$}
 \item \blue{(mental exper.)}
-Ready to apply the Exact Rewinding Lemma \ref{lem:quantum-rewinding} (w/ $p_0$ as we don't know $p$.) \blue{Need $p_0(1-p_0) \le q(1-q)$}
+Ready to apply the Exact Rewinding Lemma \ref{lem:quantum-rewinding} (w/ $p_0$ as we don't know $p$.) \blue{(Need $p_0(1-p_0) \le q(1-q)$.)}
 \end{itemize}
 In summary, this is a Sim w/ an imaginary operator $\vb{N}$, giving the same trace bound as in Lemma \ref{lem:quantum-rewinding}. But for the real Sim, there is no $\vb{N}$. 
 \begin{itemize}
