@@ -251,14 +251,14 @@ $\vb{\Delta}_1 \coloneqq \idm_\reg{wx}  -  \vb{\Delta}_0$. The $\Set{\vb{\Delta}
 \end{itemize}
 {\small
 \begin{LemmaBox}[label={lem:technical}]{}
- For all $\ket{\psi}\in \mathcal{H}(\reg{w})$, $\ket{\gamma_0} = \ket{\psi}_\reg{w}\ket{0}_\reg{x}$ is an eigenvector of $\underbrace{\vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} \vb{\Delta}_0}_{\coloneqq \vb{M}}$ with corresponding eigenvalue $\lambda = 1/2$.
+ For all $\ket{\psi}\in \mathcal{H}(\reg{w})$, $\ket{\gamma_0} = \ket{\psi}_\reg{w}\ket{0}_\reg{x}$ is an eigenvector of $\underbrace{\vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{V} \vb{T} \vb{\Delta}_0}_{\coloneqq \vb{M}}$ with corresponding eigenvalue $\lambda = 1/2$.
 \end{LemmaBox}
 }
-{\bf Proof.} Recall $\vb{Q}	 = (\idm_\reg{w} \tensor \bra{0}_\reg{x}) \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} (\idm_\reg{w} \tensor \ket{0}_\reg{x}) = \frac{1}{2}\idm_\reg{w}$.
+{\bf Proof.} Recall $\vb{Q}	 = (\idm_\reg{w} \tensor \bra{0}_\reg{x}) \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{V} \vb{T} (\idm_\reg{w} \tensor \ket{0}_\reg{x}) = \frac{1}{2}\idm_\reg{w}$.
 \begin{align*}
 \Rightarrow ~~ & 
-\vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} \vb{\Delta}_0 = (\idm_\reg{w}\tensor\ket{0}_\reg{x}) \vb{Q} (\idm_\reg{w}\tensor\bra{0}_\reg{x}) = \frac{1}{2} \idm_\reg{w} \tensor \ketbra{0}_\reg{x} \\
-\Rightarrow ~~ &  \forall \ket{\psi}, \vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} \vb{\Delta}_0 \underbrace{\ket{\psi}_\reg{w} \ket{0}_\reg{x}}_{\ket{\gamma_0}} = \big(\frac{1}{2} \idm_\reg{w} \tensor \ketbra{0}_\reg{x}\big) \underbrace{\ket{\psi}_\reg{w} \ket{0}_\reg{x}}_{\ket{\gamma_0}} = \frac{1}{2}\underbrace{\ket{\psi}_\reg{w} \ket{0}_\reg{x}}_{\ket{\gamma_0}}
+\vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0  \vb{V} \vb{T} \vb{\Delta}_0 = (\idm_\reg{w}\tensor\ket{0}_\reg{x}) \vb{Q} (\idm_\reg{w}\tensor\bra{0}_\reg{x}) = \frac{1}{2} \idm_\reg{w} \tensor \ketbra{0}_\reg{x} \\
+\Rightarrow ~~ &  \forall \ket{\psi}, \vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0  \vb{V} \vb{T} \vb{\Delta}_0 \underbrace{\ket{\psi}_\reg{w} \ket{0}_\reg{x}}_{\ket{\gamma_0}} = \big(\frac{1}{2} \idm_\reg{w} \tensor \ketbra{0}_\reg{x}\big) \underbrace{\ket{\psi}_\reg{w} \ket{0}_\reg{x}}_{\ket{\gamma_0}} = \frac{1}{2}\underbrace{\ket{\psi}_\reg{w} \ket{0}_\reg{x}}_{\ket{\gamma_0}}
 \end{align*}
 \end{frame}
 
@@ -408,7 +408,7 @@ Extends to comp.-hiding $\Com$ later
 Key ingredients for the GI simulator:
 \begin{itemize}
 \item
-Define an operator: $\vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0 \vb{T} \vb{V} \vb{\Delta}_0$ ($\eqqcolon \vb{M}$) 
+Define an operator: $\vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0  \vb{V} \vb{T} \vb{\Delta}_0$ ($\eqqcolon \vb{M}$) 
 \item
 An technical Lemma \ref{lem:technical}: $\lambda=\frac{1}{2}$ ~~$(\perp~~ \ket{\psi})$
 \item
@@ -462,7 +462,7 @@ $\mqty{
 	$\vb{U} (2 \vb{\Delta}_0 - \idm) \vb{U}^\dagger \ket{\delta_1} = 2\sqrt{p(1-p)}\ket{\delta_0} + (1-2p)\ket{\delta_1} $
 	\end{itemize}
 \item Measure $\Set{\vb{\Pi}_0, \vb{\Pi}_1}$. Go to $\ket{\delta_1}$ w.p.\ $(1-2p)$.
-\item Keep failing after $t$ iteration: $1- (1-p)(1-2p)^t$. Then Chernoff bound. 
+\item Keep failing after $t$ iteration: $(1-p)(1-2p)^t$. Can be negligible by setting $t$ properly.
 \end{itemize}
 \end{frame}
 
@@ -476,7 +476,7 @@ such that for every input $\ket{\psi}$, the output $\rho$ of $\vb{R}$ satisfies 
 \begin{itemize}
 	\item ``Exact'' refers to the face that $p~~\perp~~\ket{\psi}$.
 \item
-The $\frac{\log(1/\epsilon)}{p(1-p)}$ is due to Chernoff bound.
+The $\frac{\log(1/\epsilon)}{p(1-p)}$: because we need to set a proper $t$ to get negligible failing error.
 \item 
 Only need poly-size for a negligible $\epsilon$.
 \item
