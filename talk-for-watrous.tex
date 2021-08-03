@@ -387,12 +387,16 @@ Caveats:
 \item
 $\Pr[\text{Guess correctly}] = \frac{1}{m}$, where $m=$ \# edges. 
 \item
-$\Pr[\text{Guess correctly}] ~~~\perp~~~ \ket{\psi}$?
+$\Pr[\text{Guess correctly}] ~\perp~ \ket{\psi}$?
 \begin{itemize}
 \item
-1st msg using perfect-binding (PB) $\Com$
+Yes, if the 1st msg.\ is a perfect-hiding (PH) $\Com$
+\begin{itemize}
 \item
 What about binding? --- Collapse-binding suffices \cite{DBLP:conf/eurocrypt/Unruh16}
+\end{itemize}
+\item 
+No, if the 1st $\Com$ msg.\ is only statistically/computationally-hiding.
 \item
 We assume an ideal $\Com$ for simplicity: perfect-hiding and perfectly-binding
 \item
@@ -410,7 +414,7 @@ Key ingredients for the GI simulator:
 \item
 Define an operator: $\vb{\Delta}^\dagger_0 \vb{T}^\dagger \vb{V}^\dagger \vb{\Pi}_0  \vb{V} \vb{T} \vb{\Delta}_0$ ($\eqqcolon \vb{M}$) 
 \item
-An technical Lemma \ref{lem:technical}: $\lambda=\frac{1}{2}$ ~~$(\perp~~ \ket{\psi})$
+An technical Lemma \ref{lem:technical}: $\lambda=\frac{1}{2}$ $(\perp \ket{\psi})$
 \item
 Invoke Marriot-Watrous Lemma \ref{lem:marriot-watrous} with $\lambda=\frac{1}{2}$:
 \begin{itemize}
@@ -421,9 +425,9 @@ Invoke Marriot-Watrous Lemma \ref{lem:marriot-watrous} with $\lambda=\frac{1}{2}
 What will change for the G3C protocol?
 \begin{itemize}
 \item
-$\vb{M}$ defined as before ($\vb{T}$ modified in the natural way)
+$\vb{M}$ defined as before (w/ $\vb{T}$ and $\vb{V}$ modified in the natural way)
 \item
-Lemma \ref{lem:technical}: $\lambda=\frac{1}{m}$ ~~$(\perp~~ \ket{\psi})$
+Lemma \ref{lem:technical}: $\lambda=\frac{1}{m}$ $(\perp \ket{\psi})$
 \item
 Invoke Marriot-Watrous Lemma \ref{lem:marriot-watrous} with $\lambda=\frac{1}{m}$:
 \begin{itemize}
@@ -462,25 +466,29 @@ $\mqty{
 	$\vb{U} (2 \vb{\Delta}_0 - \idm) \vb{U}^\dagger \ket{\delta_1} = 2\sqrt{p(1-p)}\ket{\delta_0} + (1-2p)\ket{\delta_1} $
 	\end{itemize}
 \item Measure $\Set{\vb{\Pi}_0, \vb{\Pi}_1}$. Go to $\ket{\delta_1}$ w.p.\ $(1-2p)$.
-\item Keep failing after $t$ iteration: $(1-p)(1-2p)^t$. Can be negligible by setting $t$ properly.
+\item Prob.\ for continuous failure after $t$ iteration: $(1-p)(1-2p)^t$. Can be negl.\ by setting $t$ properly.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{The General Quantum Rewinding Lemma (Exact)}
+{\small
 \begin{LemmaBox}[label={lem:quantum-rewinding}]{Exact Quantum Rewinding \cite{DBLP:journals/siamcomp/Watrous09}}
-$\vb{Q}$ is a QC works on ${\ket{\psi}}$ and with $\Pr[\mathsf{success}] = p ~~(\perp ~\ket{\psi})$ outputs $\green{\ket{\delta_0}}$. Then, for any $\epsilon>0$, there exists another QC $\vb{R}$ of size
+$\vb{Q}$ is a QC works on ${\ket{\psi}}$ and with $\Pr[\mathsf{success}] = p$ $(\perp \ket{\psi})$ outputs $\green{\ket{\delta_0}}$. Then, for any $\epsilon>0$, there exists another QC $\vb{R}$ of size
 $$O\left(\frac{\log(1/\epsilon)}{p(1-p)} \cdot \mathsf{size}(\vb{Q})\right)$$
-such that for every input $\ket{\psi}$, the output $\rho$ of $\vb{R}$ satisfies $\Tr(\rho \green{\ketbra{\delta_0}}) \ge 1- \epsilon$.
-\end{LemmaBox}
+such that for every input $\ket{\psi}$, the output $\rho$ of $\vb{R}$ satisfies $\green{\bra{\delta_0}} \rho \green{\ket{\delta_0}} \ge 1- \epsilon$.
+\end{LemmaBox}}
 \begin{itemize}
-	\item ``Exact'' refers to the face that $p~~\perp~~\ket{\psi}$.
+	\item $\green{\bra{\delta_0}} \rho \green{\ket{\delta_0}} =$  the squared {\em Fidelity} (i.e., $F^2(\rho, \green{\ketbra{\delta_0}})$)
+	\begin{itemize}
+	\item a metric for how close these two outputs are. (The closer to 1, the better) 
+	\item relation to trace distance: $1 - F(\rho_1, \rho_2) \le \norm{\rho_1 - \rho_2}_\mathrm{tr} \le \sqrt{1 - F^2(\rho_1, \rho_2) }$
+	\end{itemize}
+	\item ``Exact'' refers to the face that $p\perp \ket{\psi}$.
 \item
-The $\frac{\log(1/\epsilon)}{p(1-p)}$: because we need to set a proper $t$ to get negligible failing error.
+The $\frac{\log(1/\epsilon)}{p(1-p)}$: because we need a proper $t$ to achieve a negl.\ failure prob.
 \item 
 Only need poly-size for a negligible $\epsilon$.
-\item
-For the trace, the closer to 1, the better.
 \end{itemize}
 \end{frame}
 
@@ -488,9 +496,9 @@ For the trace, the closer to 1, the better.
 \frametitle{G3C ZK with Comp.-Hiding \Com}
 \begin{itemize}
 \item
-Sim's 1st msg.\ $\cind$ Prover's 1st msg.\
+(Sim's 1st msg.) $\cind$ (Prover's 1st msg.)
 \item
-$V^*$'s challenge $a$ $\not\perp$ the 1st msg.\
+($V^*$'s challenge $a$) $\not\perp$ (the 1st msg.)
 \item
 In Lemma \ref{lem:quantum-rewinding}, $\Pr[\mathsf{success}] = p(\ket{\psi})$. 
 \begin{itemize}
@@ -512,7 +520,7 @@ Let $\vb{Q}$, $\ket{\psi}$, and $\green{\ket{\delta_0}}$ as before. But $\Pr[\ma
 Then, for any $\epsilon>0$, there exists another QC $\vb{R}$ of size
 $O\left(\frac{\log(1/\epsilon)}{\blue{p_0(1-p_0)}} \cdot \mathsf{size}(\vb{Q})\right)$
 such that for every input $\ket{\psi}$, the output $\rho$ of $\vb{R}$ satisfies:\\[-0.5em]
-$$\Tr(\rho \green{\ketbra{\delta_0}}) \ge 1- \blue{16\epsilon\frac{\log^2(1/\epsilon)}{p^2_0(1-p_0)^2}}.$$
+$$ F^2(\rho, \green{\ketbra{\delta_0}}) = \green{\bra{\delta_0}} \rho \green{\ket{\delta_0}} \ge 1- \blue{16\epsilon\frac{\log^2(1/\epsilon)}{p^2_0(1-p_0)^2}}.$$
 \end{LemmaBox}
 
 Proof at a high-level:
